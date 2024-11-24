@@ -6,10 +6,6 @@ import { User } from "@/types/user.types";
 
 // User Schema
 const UserSchema: Schema<User> = new Schema({
-  id: {
-    type: String,
-    required: [true, "User ID is required"],
-  },
   email: {
     type: String,
     required: [true, "Email is required"],

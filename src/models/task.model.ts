@@ -5,10 +5,6 @@ import { Schema } from "mongoose";
 
 // Task Schema
 export const TaskSchema = new Schema<Task>({
-  id: {
-    type: String,
-    required: [true, "Task ID is required"],
-  },
   title: {
     type: String,
     required: [true, "Task title is required"],
@@ -19,7 +15,13 @@ export const TaskSchema = new Schema<Task>({
     required: [true, "Task duration is required"],
   },
   subtopics: {
-    type: [String],
+    title: {
+      type: String,
+      required: [true, "Subtopic title is required"],
+    },
+    resources: {
+      type: String,
+    },
     default: [],
   },
   is_completed: {
@@ -27,10 +29,6 @@ export const TaskSchema = new Schema<Task>({
     default: false,
   },
   prerequisites: {
-    type: [String],
-    default: [],
-  },
-  resources: {
     type: [String],
     default: [],
   },

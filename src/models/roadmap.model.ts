@@ -6,10 +6,6 @@ import { Roadmap } from "@/types/roadmap.types";
 
 // Roadmap Schema
 export const RoadmapSchema = new Schema<Roadmap>({
-  id: {
-    type: String,
-    required: [true, "Roadmap ID is required"],
-  },
   title: {
     type: String,
     required: [true, "Roadmap title is required"],
