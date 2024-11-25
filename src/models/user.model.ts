@@ -1,5 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import mongoose, { Document, Schema } from "mongoose";
+
+import mongoose, { Schema } from "mongoose";
 import { RoadmapSchema } from "./roadmap.model";
 import { User } from "@/types/user.types";
 
