@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import mongoose, { Document, Schema } from "mongoose";
 import { RoadmapSchema } from "./roadmap.model";
 import { User } from "@/types/user.types";
@@ -35,11 +36,13 @@ const UserSchema: Schema<User> = new Schema({
   },
   goal: {
     type: String,
-    required: [true, "Goal is required"],
+    default : ""
+    // required: [true, "Goal is required"],
   },
   current_status: {
     type: String,
-    required: [true, "Current status is required"],
+    default : ""
+    // required: [true, "Current status is required"],
   },
   specifications: {
     type: String,
