@@ -5,12 +5,12 @@ export async function POST(request: Request) {
     try {
         const prompt1 = ""; // get from file prompt.ts
         const { prompt2, prompt3 }: { prompt2: string, prompt3: string } = await request.json();
-        let finalPrompt: string = prompt1 + prompt2 + prompt3;  // create final prompt
+        const finalPrompt: string = prompt1 + prompt2 + prompt3;  // create final prompt
 
         const result = await model.generateContent(finalPrompt);
         const responseText = result.response.text();
 
-        let roadmap = responseText;//Parse response text to proper json format and form roadmap from it, implement after seeing responses coming from gemini api
+        const roadmap = responseText;//Parse response text to proper json format and form roadmap from it, implement after seeing responses coming from gemini api
 
         return Response.json({ //roadmap successfully generated
             success: true,

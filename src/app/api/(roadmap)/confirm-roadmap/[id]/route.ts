@@ -9,8 +9,8 @@ export async function GET(request: Request, { params }: { params: { id: string }
         await connectDB();
 
         const { id } = params; // roadmap id
-        let session = await getServerSession(authOptions);
-        let userId = session?.user._id; // user id
+        const session = await getServerSession(authOptions);
+        const userId = session?.user._id; // user id
 
 
         const roadmap = await RoadmapModel.findById(id);
