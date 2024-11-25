@@ -25,8 +25,6 @@ export async function GET(request: Request, { params }: { params: { id: string }
             }, { status: 400 });
         }
 
-
-
         const user = await UserModel.findById(userId);
 
         if (!user) { // if user dont exist

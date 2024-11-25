@@ -1,6 +1,6 @@
 // Task interface
 export interface Task {
-    id: string; // Unique task ID
+    _id: string; // Unique task ID
     title: string; // Task title
     duration: number; // Duration of the task (in hours/days)
     subtopics: { title: string, resources: string }[]; // Subtopics covered

@@ -17,7 +17,6 @@ export async function GET(request: Request, { params }: { params: { id: string }
         if (!roadmap) { // if roadmap dont exist
             return NextResponse.json<ApiResponse>({
                 success: false,
-                // messsage: "Roadmap you requested does not exist"
                 message: "Roadmap you requested does not exist"
             }, { status: StatusCodes.BAD_REQUEST });
         }
@@ -31,7 +30,6 @@ export async function GET(request: Request, { params }: { params: { id: string }
 
     } catch (error) {
         console.log("Error getting roadmap : " + error);
-
         return NextResponse.json<ApiResponse>({
             success: false,
             message: "Error occurred while getting roadmap"

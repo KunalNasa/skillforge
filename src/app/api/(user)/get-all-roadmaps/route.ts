@@ -6,6 +6,7 @@ import { ApiResponse } from "@/types/api-response.types";
 import { NextResponse } from "next/server";
 import { StatusCodes } from "@/types/statusCodes";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(request: Request) {
     try {
         await connectDB();
@@ -15,7 +16,7 @@ export async function GET(request: Request) {
         const user = await UserModel.findById(userId);
 
         if (!user) { // if user dont exist
-            return Response.json({
+            return NextResponse.json<ApiResponse>({
                 success: false,
                 message: "User not found"
             }, { status: StatusCodes.BAD_REQUEST })
