@@ -2,6 +2,7 @@ import connectDB from "@/lib/connectDB";
 import { RoadmapModel } from "@/models/roadmap.model";
 import { ApiResponse } from "@/types/api-response.types";
 import { Roadmap } from "@/types/roadmap.types";
+import { NextResponse } from "next/server";
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
 
@@ -29,7 +30,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
     } catch (error) {
         console.log("Error getting roadmap : " + error);
 
-        return Response.json({
+        return NextResponse.json<ApiResponse>({
             success: false,
             message: "Error occurred while getting roadmap"
         }, { status: 500 });

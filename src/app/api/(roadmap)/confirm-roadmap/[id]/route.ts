@@ -2,7 +2,9 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import connectDB from "@/lib/connectDB";
 import { RoadmapModel } from "@/models/roadmap.model";
 import UserModel from "@/models/user.model";
+import { ApiResponse } from "@/types/api-response.types";
 import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
     try {
@@ -46,7 +48,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
 
     } catch (error) {
         console.log("Error confirming roadmap : " + error);
-        return Response.json({
+        return NextResponse.json<ApiResponse>({
             success: false,
             message: "Error occurred while confirming roadmap"
         }, { status: 500 });
