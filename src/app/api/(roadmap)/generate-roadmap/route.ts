@@ -1,5 +1,6 @@
 import { model } from "@/lib/geminiAIConfig";
 import { ApiResponse } from "@/types/api-response.types";
+import { StatusCodes } from "@/types/statusCodes";
 import { NextResponse } from "next/server";
 
 
@@ -18,13 +19,13 @@ export async function POST(request: Request) {
             success: true,
             message: "Roadmap successfully generated, Please confirm the roadmap",
             roadmap: roadmap
-        }, { status: 200 })
+        }, { status: StatusCodes.CREATED })
 
     } catch (error) {
         console.log("Error generating roadmap : " + error);
         return NextResponse.json<ApiResponse>({
             success: true,
             message: "Error occurred while generating roadmap"
-        })
+        }, { status: StatusCodes.INTERNAL_SERVER_ERROR })
     }
 }

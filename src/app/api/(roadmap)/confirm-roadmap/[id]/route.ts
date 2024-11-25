@@ -3,6 +3,7 @@ import connectDB from "@/lib/connectDB";
 import { RoadmapModel } from "@/models/roadmap.model";
 import UserModel from "@/models/user.model";
 import { ApiResponse } from "@/types/api-response.types";
+import { StatusCodes } from "@/types/statusCodes";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -43,7 +44,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
             success: true,
             message: "Roadmap successfull confirmed",
             roadmap
-        }, { status: 200 });
+        }, { status: StatusCodes.OK });
 
 
     } catch (error) {
@@ -51,6 +52,6 @@ export async function GET(request: Request, { params }: { params: { id: string }
         return NextResponse.json<ApiResponse>({
             success: false,
             message: "Error occurred while confirming roadmap"
-        }, { status: 500 });
+        }, { status: StatusCodes.INTERNAL_SERVER_ERROR });
     }
 }
