@@ -36,17 +36,13 @@ const UserSchema: Schema<User> = new Schema({
   },
   goal: {
     type: String,
-    default : ""
+    default: ""
     // required: [true, "Goal is required"],
   },
   current_status: {
     type: String,
-    default : ""
+    default: ""
     // required: [true, "Current status is required"],
-  },
-  specifications: {
-    type: String,
-    default: "",
   },
   profile_picture: {
     type: String,

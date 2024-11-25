@@ -10,7 +10,6 @@ export interface User extends Document {
     date_created: Date; // Account creation date
     goal: string; // User's primary goal
     current_status: string; // User's current state (e.g., "Student," "Professional")
-    specifications: string; // Optional user-specific details
     profile_picture: string; // URL of profile picture
     roadmaps: Roadmap[]; // Embedded array of roadmaps
 }
