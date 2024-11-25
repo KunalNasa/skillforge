@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { TaskSchema } from './task.model';
 import { Roadmap } from "@/types/roadmap.types";
 
@@ -40,3 +40,5 @@ export const RoadmapSchema = new Schema<Roadmap>({
     default: "Gemini AI",
   },
 });
+
+export const RoadmapModel = (mongoose.models.Roadmap as mongoose.Model<Roadmap>) || mongoose.model<Roadmap>("Roadmap", RoadmapSchema);
