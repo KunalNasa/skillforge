@@ -1,6 +1,5 @@
 import { Task } from "@/types/task.types";
-import mongoose, { Model, Schema } from "mongoose";
-
+import mongoose, { Schema } from "mongoose";
 
 
 // Task Schema
