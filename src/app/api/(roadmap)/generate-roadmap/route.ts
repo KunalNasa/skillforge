@@ -1,4 +1,5 @@
 import { model } from "@/lib/geminiAIConfig";
+import { prompt1 } from "@/lib/prompt";
 import { ApiResponse } from "@/types/api-response.types";
 import { StatusCodes } from "@/types/statusCodes";
 import { NextResponse } from "next/server";
@@ -6,7 +7,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
     try {
-        const prompt1 = ""; // get from file prompt.ts
+        // get from file prompt.ts
         const { prompt2, prompt3 }: { prompt2: string, prompt3: string } = await request.json();
         const finalPrompt: string = prompt1 + prompt2 + prompt3;  // create final prompt
 
