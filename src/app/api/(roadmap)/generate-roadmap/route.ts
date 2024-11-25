@@ -1,5 +1,4 @@
 import { model } from "@/lib/geminiAIConfig";
-import { prompt1 } from "@/lib/prompt";
 import { ApiResponse } from "@/types/api-response.types";
 import { StatusCodes } from "@/types/statusCodes";
 import { getServerSession } from "next-auth";
