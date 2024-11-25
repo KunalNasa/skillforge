@@ -8,6 +8,15 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+    const session = await getServerSession(authOptions); 
+    const userId = session?.user._id; 
+
+    if (!userId) {
+      return NextResponse.json<ApiResponse>({
+        success : false,
+        message : "Unauthorised User"
+      }, { status: StatusCodes.UNAUTHORIZED});
+    }
   try {
     await connectDB(); 
 
@@ -18,16 +27,8 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
             message : "Roadmap ID is required"
         }, {status : StatusCodes.BAD_REQUEST}) 
     }
-    
-    const session = await getServerSession(authOptions); 
-    const userId = session?.user._id; 
 
-    if (!userId) {
-      return NextResponse.json<ApiResponse>({
-        success : false,
-        message : "Unauthorised User"
-      }, { status: StatusCodes.UNAUTHORIZED});
-    }
+    
 
     // Find the user and remove the roadmap with the specified ID from their `roadmaps` array
     const user = await UserModel.findOneAndUpdate(
