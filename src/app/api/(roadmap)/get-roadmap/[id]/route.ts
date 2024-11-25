@@ -2,6 +2,7 @@ import connectDB from "@/lib/connectDB";
 import { RoadmapModel } from "@/models/roadmap.model";
 import { ApiResponse } from "@/types/api-response.types";
 import { Roadmap } from "@/types/roadmap.types";
+import { StatusCodes } from "@/types/statusCodes";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
@@ -14,17 +15,18 @@ export async function GET(request: Request, { params }: { params: { id: string }
         const roadmap: Roadmap | null = await RoadmapModel.findById(id);
 
         if (!roadmap) { // if roadmap dont exist
-            return Response.json({
+            return NextResponse.json<ApiResponse>({
                 success: false,
-                messsage: "Roadmap you requested does not exist"
-            }, { status: 400 });
+                // messsage: "Roadmap you requested does not exist"
+                message: "Roadmap you requested does not exist"
+            }, { status: StatusCodes.BAD_REQUEST });
         }
 
-        return Response.json({ // if roadmap exist  send roadmap
+        return NextResponse.json<ApiResponse>({ // if roadmap exist  send roadmap
             success: true,
             message: "Roadmap successfully fetched",
             roadmap
-        }, { status: 200 });
+        }, { status: StatusCodes.OK });
 
 
     } catch (error) {
@@ -33,7 +35,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
         return NextResponse.json<ApiResponse>({
             success: false,
             message: "Error occurred while getting roadmap"
-        }, { status: 500 });
+        }, { status: StatusCodes.INTERNAL_SERVER_ERROR });
     }
 
 }
