@@ -6,11 +6,12 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import UserModel from "@/models/user.model";
 import { generatePromptForGemini } from "@/lib/generatePromptForGemini";
+import { Roadmap } from "@/types/roadmap.types";
+import { RoadmapModel } from "@/models/roadmap.model";
 
 
 export async function POST(request: Request) {
     try {
-        // get from file prompt.ts
         const session = await getServerSession(authOptions);
         const userId = session?.user._id;
 
@@ -23,16 +24,28 @@ export async function POST(request: Request) {
             }, { status: StatusCodes.BAD_REQUEST })
         }
 
-        const { prompt }: { prompt: string } = await request.json();
+        const { prompt, title, duration }: { prompt: string, title: string, duration: number } = await request.json();
         const finalPrompt: string = generatePromptForGemini(user, prompt);  // create final prompt
 
         const result = await model.generateContent(finalPrompt);
         const responseText = result.response.text();
 
-        console.log(responseText);
-        const roadmap = responseText;//Parse response text to proper json format and form roadmap from it, implement after seeing responses coming from gemini api
+        const updatedResponseText = removeJsonPrefix(responseText); // remove json prefix
 
-        return Response.json({ //roadmap successfully generated
+        const jsonData = parseRawToJson(updatedResponseText); //parse gemini response to json object
+        const roadmap_tasks = JSON.stringify(jsonData, null, 2); // json object to js 
+
+        const roadmap = new RoadmapModel<Roadmap>({
+            title,
+            duration,
+            tasks: JSON.parse(roadmap_tasks)
+        })
+
+        await roadmap.save();
+
+
+
+        return NextResponse.json<ApiResponse>({ //roadmap successfully generated
             success: true,
             message: "Roadmap successfully generated, Please confirm the roadmap",
             roadmap: roadmap

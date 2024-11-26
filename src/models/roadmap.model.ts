@@ -27,14 +27,6 @@ export const RoadmapSchema = new Schema<Roadmap>({
     type: Date,
     default: Date.now,
   },
-  goal: {
-    type: String,
-    required: [true, "Roadmap goal is required"],
-  },
-  specifications: {
-    type: String,
-    default: "",
-  },
   generated_by: {
     type: String,
     default: "Gemini AI",

@@ -33,4 +33,3 @@ export const TaskSchema = new Schema<Task>({
   },
 });
 
-export const TaskModel = (mongoose.models.TaskModel as mongoose.Model<Task>) || mongoose.model<Task>("Task", TaskSchema);

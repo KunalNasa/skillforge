@@ -44,40 +44,41 @@ export async function POST(request: NextRequest) {
     }
 }
 
-export async function PATCH(request:NextRequest) {
+export async function PATCH(request: NextRequest) {
     const session = await getServerSession(authOptions);
     const userId = session?.user._id;
-    if(!userId){
+    if (!userId) {
         return NextResponse.json<ApiResponse>({
-            success : false,
-            message : "Unauthorised user"
-        }, {status : StatusCodes.UNAUTHORIZED});
+            success: false,
+            message: "Unauthorised user"
+        }, { status: StatusCodes.UNAUTHORIZED });
     }
+
     try {
         await connectDB();
-        const {username, other_details, goal, current_status} = await request.json();
+        const { username, other_details, goal, current_status } = await request.json();
         const updateUser = await UserModel.findByIdAndUpdate(userId, {
             username,
             other_details,
             goal,
             current_status
         });
-        if(updateUser){
+        if (updateUser) {
             return NextResponse.json<ApiResponse>({
-                success : true,
-                message : "Details updated Successfully"
-            }, {status : StatusCodes.CREATED})
-        }else{
+                success: true,
+                message: "Details updated Successfully"
+            }, { status: StatusCodes.CREATED })
+        } else {
             return NextResponse.json<ApiResponse>({
-                success : false,
-                message : "User not found with given userID"
-            }, {status : StatusCodes.NOT_FOUND});
+                success: false,
+                message: "User not found with given userID"
+            }, { status: StatusCodes.NOT_FOUND });
         }
     } catch (error) {
         console.log("Internal server error in update user details", error);
         return NextResponse.json<ApiResponse>({
-            success : false,
-            message : "Internal server error"
-        }, {status : StatusCodes.INTERNAL_SERVER_ERROR})
+            success: false,
+            message: "Internal server error"
+        }, { status: StatusCodes.INTERNAL_SERVER_ERROR })
     }
 }
