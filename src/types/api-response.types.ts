@@ -4,8 +4,7 @@ import { Roadmap } from "./roadmap.types";
 export interface ApiResponse {
     success: boolean,
     message: string,
-    //roadmap?: Roadmap,
-    roadmap?: any,
+    roadmap?: Roadmap,
     user?: User,
     progress?: number,
 }

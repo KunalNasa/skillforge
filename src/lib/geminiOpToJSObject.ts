@@ -1,4 +1,4 @@
-function parseRawToJson(rawData: string) {
+export function parseRawToJson(rawData: string) {
     try {
         // Step 1: Clean up the raw string
         const cleanedData = rawData.replace(/\\n/g, "") // Remove \n

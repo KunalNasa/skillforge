@@ -8,7 +8,14 @@ import UserModel from "@/models/user.model";
 import { generatePromptForGemini } from "@/lib/generatePromptForGemini";
 import { Roadmap } from "@/types/roadmap.types";
 import { RoadmapModel } from "@/models/roadmap.model";
+import { parseRawToJson } from "@/lib/geminiOpToJSObject";
 
+function removeJsonPrefix(input: string) {
+    if (input.startsWith("json ")) {
+        return input.slice(5); // Remove "json " (4 characters + space)
+    }
+    return input;
+}
 
 export async function POST(request: Request) {
     try {
