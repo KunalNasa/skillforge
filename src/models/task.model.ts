@@ -1,6 +1,16 @@
 import { Task } from "@/types/task.types";
 import { Schema } from "mongoose";
 
+const subtopicSchema = new Schema({
+  title: {
+    type: String,
+    required: [true, "Subtopic title is required"],
+  },
+  resources: {
+    type: String,
+  },
+})
+
 
 // Task Schema
 export const TaskSchema = new Schema<Task>({
@@ -14,13 +24,7 @@ export const TaskSchema = new Schema<Task>({
     required: [true, "Task duration is required"],
   },
   subtopics: {
-    title: {
-      type: String,
-      required: [true, "Subtopic title is required"],
-    },
-    resources: {
-      type: String,
-    },
+    type: [subtopicSchema],
     default: [],
   },
   is_completed: {

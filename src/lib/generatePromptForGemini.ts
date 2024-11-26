@@ -16,13 +16,13 @@ You are tasked with creating a roadmap for a user based on the strict structure 
 ### **Roadmap Structure (Static Schema)**:
 The roadmap must be structured into an array of tasks. Each task should include the following fields:
 
-- **Title**: (String) A descriptive title for the task. Example: "Learn JavaScript Basics."
-- **Duration**: (Number) Estimated time to complete the task, in days. Example: 10.
-- **Subtopics**: (Array of Objects) Each subtopic includes:
-  - **Title**: (String) Name of the subtopic. Example: "What are Variables?"
-  - **Resources**: (String) A resource link to learn the subtopic. Example: "https://developer.mozilla.org".
-- **Is Completed**: (Boolean) Whether the task has been completed. Default: false.
-- **Prerequisites**: (Array of Strings) Any tasks or topics that should be completed before starting this task. Example: ["Basic HTML", "Basic CSS"].
+- **title**: (String) A descriptive title for the task. Example: "Learn JavaScript Basics."
+- **duration**: (Number) Estimated time to complete the task, in days. Example: 10.
+- **subtopics**: (Array of Objects) Each subtopic includes:
+  - **title**: (String) Name of the subtopic. Example: "What are Variables?"
+  - **resources**: (String) A resource link to learn the subtopic. Example: "https://developer.mozilla.org".
+- **is_completed**: (Boolean) Whether the task has been completed. Default: false.
+- **prerequisites**: (Array of Strings) Any tasks or topics that should be completed before starting this task. Example: ["Basic HTML", "Basic CSS"].
 
 You must not deviate from this structure under any circumstances. Any additional details must fit into the fields outlined above.
 `;

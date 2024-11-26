@@ -9,12 +9,10 @@ import { generatePromptForGemini } from "@/lib/generatePromptForGemini";
 import { Roadmap } from "@/types/roadmap.types";
 import { RoadmapModel } from "@/models/roadmap.model";
 import { parseRawToJson } from "@/lib/geminiOpToJSObject";
+import mongoose from "mongoose";
 
 function removeJsonPrefix(input: string) {
-    if (input.startsWith("json ")) {
-        return input.slice(5); // Remove "json " (4 characters + space)
-    }
-    return input;
+    return input.replace(/^```json\s*/, "").replace(/```$/, "").trim();
 }
 
 export async function POST(request: Request) {
@@ -41,6 +39,8 @@ export async function POST(request: Request) {
 
         const jsonData = parseRawToJson(updatedResponseText); //parse gemini response to json object
         const roadmap_tasks = JSON.stringify(jsonData, null, 2); // json object to js 
+        console.log(JSON.parse(roadmap_tasks));
+
 
         const roadmap = new RoadmapModel<Roadmap>({
             title,

@@ -1,16 +1,21 @@
 export function parseRawToJson(rawData: string) {
     try {
+        console.log("Raw data before cleanup:", rawData);
+
         // Step 1: Clean up the raw string
-        const cleanedData = rawData.replace(/\\n/g, "") // Remove \n
-            .replace(/\\"/g, '"') // Replace escaped quotes with regular quotes
-            .trim();             // Remove any leading or trailing whitespace
+        const cleanedData = rawData.replace(/```json\s*/g, "") // Remove Markdown-style prefix
+            .replace(/```/g, "")                              // Remove trailing ```
+            .replace(/\n/g, "")                               // Remove newlines
+            .replace(/\\\"/g, '"')                            // Fix escaped quotes
+            .trim();
+
+        console.log("Cleaned data:", cleanedData);
 
         // Step 2: Parse the cleaned string into JSON
         const jsonData = JSON.parse(cleanedData);
-        return jsonData; // Return the parsed JSON object
+        return jsonData;
     } catch (error) {
         console.error("Failed to parse JSON:", error);
         return null;
     }
 }
-

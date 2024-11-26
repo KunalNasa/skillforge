@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { ApiResponse } from "@/types/api-response.types";
 import { StatusCodes } from "@/types/statusCodes";
 import connectDB from "@/lib/connectDB";
+import { User } from "@/types/user.types";
 
 export async function POST(request: NextRequest) {
     try {
@@ -47,6 +48,8 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
     const session = await getServerSession(authOptions);
     const userId = session?.user._id;
+
+
     if (!userId) {
         return NextResponse.json<ApiResponse>({
             success: false,
@@ -61,12 +64,13 @@ export async function PATCH(request: NextRequest) {
             username,
             other_details,
             goal,
-            current_status
-        });
+            current_status,
+        }, { new: true });
         if (updateUser) {
             return NextResponse.json<ApiResponse>({
                 success: true,
-                message: "Details updated Successfully"
+                message: "Details updated Successfully",
+
             }, { status: StatusCodes.CREATED })
         } else {
             return NextResponse.json<ApiResponse>({
