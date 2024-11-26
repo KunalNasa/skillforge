@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 
 export default function Home() {
@@ -20,7 +21,9 @@ export default function Home() {
         <p className="text-gray-400">
         Transform Your Journey with AI-Driven Roadmaps - Customizable, Data-Backed, and Tailored to Accelerate Your Success, Step by Step.
         </p>
+        <Link href='/#features-section'>
         <Button className="w-1/3 h-12 bg-purple-600 hover:bg-purple-500 text-lg font-semibold my-5">Explore Features</Button>
+        </Link>
       </div>
       <div className="ImageContainer w-1/2">
         <Image className="mx-auto my-auto" width={650} height={650} src="/Images/setup-wizard.svg" alt="Roadmap image" />
