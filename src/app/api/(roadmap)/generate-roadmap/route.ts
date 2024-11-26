@@ -9,7 +9,6 @@ import { generatePromptForGemini } from "@/lib/generatePromptForGemini";
 import { Roadmap } from "@/types/roadmap.types";
 import { RoadmapModel } from "@/models/roadmap.model";
 import { parseRawToJson } from "@/lib/geminiOpToJSObject";
-import mongoose from "mongoose";
 
 function removeJsonPrefix(input: string) {
     return input.replace(/^```json\s*/, "").replace(/```$/, "").trim();
