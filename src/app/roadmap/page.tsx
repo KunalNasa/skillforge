@@ -1,4 +1,7 @@
-import RoadmapVisualization from '@/components/roadmapShort';
+import Header from '@/components/Header';
+import PageEnd from '@/components/PageEnd';
+import RoadmapVisualization from '@/components/roadmapPages/roadmapShort';
+import { Progress } from '@/components/ui/progress';
 import { Timeline } from '@/components/ui/timeline';
 import { roadmapData } from '@/helpers/data';
 import Link from 'next/link';
@@ -32,6 +35,7 @@ const page = () => {
 
   return (
     <div className="w-full flex  flex-col align-middle">
+      <Header/>
       <div className=" w-3/5 flex flex-col mx-auto text-center">
         <div className="text-7xl font-bold py-5">
           Shaping Your Future With <span className=" text-gradient">AI-Powered</span> Precision
@@ -44,8 +48,17 @@ const page = () => {
         <RoadmapVisualization roadmapData={roadmapData} />
       </div>
 
-      <div className='text-neutral-500 text-center text-5xl'>{roadmapData.title}</div>
+      <div className='text-neutral-500 text-center text-5xl'>
+            {roadmapData.title}
+      </div>
+      <div className='Progress p-5 mx-20 justify-center'>
+          <p className='text-2xl my-2 font-semibold'>Your Progress</p>
+          <div className='flex items-center justify-start'>
+            <Progress className='w-[90%]' value={33} />
+          </div>
+        </div>
       <Timeline data={dataTemp} />
+      <PageEnd/>
     </div>
   );
 }
