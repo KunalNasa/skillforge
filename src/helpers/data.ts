@@ -146,61 +146,6 @@ export const roadmapData = {
             ],
             "_id": "6745c2aa2cfbffd00526733b"
         },
-        {
-            "title": "Learn TensorFlow.js Basics",
-            "duration": 20,
-            "subtopics": [
-                {
-                    "title": "Introduction to TensorFlow.js",
-                    "resources": "https://www.tensorflow.org/js",
-                    "_id": "6745c2aa2cfbffd00526733c"
-                },
-                {
-                    "title": "Tensor Creation and Manipulation",
-                    "resources": "https://www.tensorflow.org/js/guide/tensors",
-                    "_id": "6745c2aa2cfbffd00526733d"
-                },
-                {
-                    "title": "Building Simple Models",
-                    "resources": "https://www.tensorflow.org/js/guide/models",
-                    "_id": "6745c2aa2cfbffd00526733e"
-                }
-            ],
-            "is_completed": false,
-            "prerequisites": [
-                "Learn JavaScript Fundamentals"
-            ],
-            "_id": "6745c2aa2cfbffd00526733b"
-        },
-        {
-            "title": "Learn TensorFlow.js Basics",
-            "duration": 20,
-            "subtopics": [
-                {
-                    "title": "Introduction to TensorFlow.js",
-                    "resources": "https://www.tensorflow.org/js",
-                    "_id": "6745c2aa2cfbffd00526733c"
-                },
-                {
-                    "title": "Tensor Creation and Manipulation",
-                    "resources": "https://www.tensorflow.org/js/guide/tensors",
-                    "_id": "6745c2aa2cfbffd00526733d"
-                },
-                {
-                    "title": "Building Simple Models",
-                    "resources": "https://www.tensorflow.org/js/guide/models",
-                    "_id": "6745c2aa2cfbffd00526733e"
-                }
-            ],
-            "is_completed": false,
-            "prerequisites": [
-                "Learn JavaScript Fundamentals"
-            ],
-            "_id": "6745c2aa2cfbffd00526733b"
-        },
-
-
-
     ],
     "progress": 0,
     "generated_by": "Gemini AI",
