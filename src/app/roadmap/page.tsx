@@ -12,8 +12,8 @@ const page = () => {
       content: (
         <div>
           {task.subtopics.map((subtopic) => {
-            return <div className='bg-purple-950  border-r-2 my-10 p-5 text-right subtopic-card'>
-              <div className=''><b>{subtopic.title}</b></div>
+            return <div className='bg-purple-950  border-r-2 my-10 p-5 subtopic-card w-3/4 ml-20 pl-10'>
+              <div className='text-left'><b>{subtopic.title}</b></div>
               <div className='text-neutral-400'><Link href={subtopic.resources}>{subtopic.resources}</Link></div>
             </div>
           })}
