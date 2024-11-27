@@ -82,7 +82,3 @@ html {
     @apply bg-background text-foreground;
   }
 }
-
-.subtopic-card {
-  border-radius: 29px;
-}

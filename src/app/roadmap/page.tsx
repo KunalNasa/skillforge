@@ -12,9 +12,9 @@ const page = () => {
       content: (
         <div>
           {task.subtopics.map((subtopic) => {
-            return <div className='bg-purple-950  border-r-2 my-10 p-5 subtopic-card w-3/4 ml-20 pl-10'>
-              <div className='text-left'><b>{subtopic.title}</b></div>
-              <div className='text-neutral-400'><Link href={subtopic.resources}>{subtopic.resources}</Link></div>
+            return <div className='bg-purple-950  border-r-2 my-10 p-5 subtopic-card w-3/4 ml-20 pl-10 rounded-md'>
+              <div className='text-left text-lg mb-3'><b>{subtopic.title}</b></div>
+              <div className='text-neutral-400 text-sm'><Link href={subtopic.resources}>{subtopic.resources}</Link></div>
             </div>
           })}
         </div>
