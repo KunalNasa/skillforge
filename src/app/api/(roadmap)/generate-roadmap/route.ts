@@ -60,7 +60,7 @@ export async function POST(request: Request) {
     } catch (error) {
         console.log("Error generating roadmap : " + error);
         return NextResponse.json<ApiResponse>({
-            success: true,
+            success: false,
             message: "Error occurred while generating roadmap"
         }, { status: StatusCodes.INTERNAL_SERVER_ERROR })
     }
