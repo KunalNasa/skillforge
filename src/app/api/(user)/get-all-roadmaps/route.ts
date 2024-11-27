@@ -27,18 +27,11 @@ export async function GET(request:NextRequest) {
         }
 
         const roadmapArray = user.roadmaps;
-        if(roadmapArray.length === 0){
-            return NextResponse.json<ApiResponse>({
-                success : false,
-                message : "No Roadmaps found for this user"
-            }, {status : StatusCodes.NOT_FOUND})
-        }else{
-            return NextResponse.json<ApiResponse>({
+        return NextResponse.json<ApiResponse>({
                 success : true,
                 message : "User Roadmaps fetched successfully",
                 allRoadmaps : roadmapArray
             }, {status : StatusCodes.OK})
-        }
     } catch (error) {
         console.log("Internal server error in Fetching roadmap : " + error);
         return NextResponse.json<ApiResponse>({

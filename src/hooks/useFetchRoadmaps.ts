@@ -6,12 +6,14 @@ const useFetchRoadmaps = () => {
         setLoading(true);
         try {
             const response = await axios.get('/api/get-all-roadmaps');
-            console.log(response);
+            return response.data.allRoadmaps;
         } catch (error) {
             console.log(error);
+        }finally{
+            setLoading(false);
         }
     } 
-    return fetchRoadmapsFromDB;
+    return {fetchRoadmapsFromDB, loading};
 }
 
 export default useFetchRoadmaps
