@@ -3,6 +3,7 @@ import { Timeline } from '@/components/ui/timeline';
 import { roadmapData } from '@/helpers/data';
 import Link from 'next/link';
 import React from 'react'
+import { GoLinkExternal } from "react-icons/go";
 
 const page = () => {
 
@@ -12,9 +13,16 @@ const page = () => {
       content: (
         <div>
           {task.subtopics.map((subtopic) => {
-            return <div key={subtopic.title} id={task.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}  className='bg-purple-950  border-r-2 my-10 p-5 text-right subtopic-card'>
+            return <div key={subtopic.title} id={task.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}  className='bg-gradient-to-r from-purple-800 via-purple-600 to-purple-500 border-r-4 my-10 p-5 text-left rounded-md'>
               <div className=''><b>{subtopic.title}</b></div>
-              <div className='text-neutral-400'><Link href={subtopic.resources}>{subtopic.resources}</Link></div>
+              <div className='text-neutral-400'>
+                <Link
+                target="_blank"
+                rel="noopener noreferrer"
+                className='flex items-center gap-2  transition-transform transform hover:scale-100 hover:shadow-2xl hover:translate-x-1 hover:text-blue-600' href={subtopic.resources}>
+                  <span>Resources</span>
+                  <span><GoLinkExternal/></span>
+                </Link></div>
             </div>
           })}
         </div>
