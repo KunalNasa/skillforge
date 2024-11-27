@@ -1,6 +1,7 @@
 import RoadmapVisualization from '@/components/roadmapShort';
 import { Timeline } from '@/components/ui/timeline';
 import { roadmapData } from '@/helpers/data';
+import Link from 'next/link';
 import React from 'react'
 
 const page = () => {
@@ -11,9 +12,9 @@ const page = () => {
       content: (
         <div>
           {task.subtopics.map((subtopic) => {
-            return <div className='bg-neutral-800 text-white border-r-2'>
-              <div>{subtopic.title}</div>
-              <div>{subtopic.resources}</div>
+            return <div className='bg-purple-950  border-r-2 my-10 p-5 text-right subtopic-card'>
+              <div className=''><b>{subtopic.title}</b></div>
+              <div className='text-neutral-400'><Link href={subtopic.resources}>{subtopic.resources}</Link></div>
             </div>
           })}
         </div>
