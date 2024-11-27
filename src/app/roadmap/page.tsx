@@ -12,7 +12,7 @@ const page = () => {
       content: (
         <div>
           {task.subtopics.map((subtopic) => {
-            return <div className='bg-purple-950  border-r-2 my-10 p-5 subtopic-card w-3/4 ml-20 pl-10 rounded-md'>
+            return <div key={subtopic.title} id={task.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')} className='bg-purple-950  border-r-2 my-10 p-5 subtopic-card w-3/4 ml-20 pl-10 rounded-md'>
               <div className='text-left text-lg mb-3'><b>{subtopic.title}</b></div>
               <div className='text-neutral-400 text-sm'><Link href={subtopic.resources}>{subtopic.resources}</Link></div>
             </div>

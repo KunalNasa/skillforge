@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import React from 'react';
 
 interface RoadmapTask {
@@ -48,8 +49,8 @@ export default function MirroredRoadmap({ roadmapData }: RoadmapProps) {
                 </svg>
                 <div className="grid grid-cols-3 gap-8">
                     {roadmapData.tasks.map((task, index) => (
-                        <div
-                            key={task.title}
+                        <Link href={`/roadmap/#${task.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
+                            key={index}
                             className={`w-40 h-40 rounded-full flex items-center justify-center bg-purple-700 border-4 border-purple-900 text-center p-4 ${index % 2 === 0 ? 'translate-y-[-20px]' : 'translate-y-[20px]'
                                 }`}
                             style={{
@@ -63,7 +64,7 @@ export default function MirroredRoadmap({ roadmapData }: RoadmapProps) {
                                 <h2 className="font-bold text-lg">{task.title}</h2>
                                 <p className="text-sm text-purple-200">{task.duration} days</p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
