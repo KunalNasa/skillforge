@@ -1,7 +1,7 @@
 import z from 'zod';
 
 // Enum for current status
-const StatusEnum = z.enum(["beginner", "intermediate", "advanced"]);
+const StatusEnum = z.enum(["Beginner", "Intermediate", "Advanced"]);
 
 export const userProfileSchema = z.object({
   username: z
@@ -24,5 +24,5 @@ export const userProfileSchema = z.object({
     .min(4, { message: "Goal must be at least 4 characters long." })
     .max(20, { message: "Goal must not exceed 20 characters." }),
 
-  current_status: StatusEnum.default("beginner"), // Default set to "beginner"
+  current_status: StatusEnum.default("Beginner"), // Default set to "beginner"
 });
