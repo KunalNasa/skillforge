@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react';
+import { toast } from './use-toast';
 const useFetchRoadmaps = () => {
     const [loading, setLoading] = useState(false);
     const fetchRoadmapsFromDB = async () => {
@@ -7,8 +8,12 @@ const useFetchRoadmaps = () => {
         try {
             const response = await axios.get('/api/get-all-roadmaps');
             return response.data.allRoadmaps;
-        } catch (error) {
-            console.log(error);
+        } catch (error : any) {
+            toast({
+                title : "Error",
+                description : error.data.message,
+                variant : "destructive"
+            })
         }finally{
             setLoading(false);
         }

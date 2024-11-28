@@ -1,4 +1,4 @@
-import { User } from "next-auth";
+import { User } from "./user.types";
 import { Roadmap } from "./roadmap.types";
 
 export interface ApiResponse {

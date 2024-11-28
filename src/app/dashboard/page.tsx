@@ -10,7 +10,6 @@ import React, { useEffect, useState } from 'react'
 
 const page = () => {
   const { data: session } = useSession();
-
   const user : User = session?.user as User;
   return (
     <div>

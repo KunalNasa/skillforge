@@ -2,7 +2,7 @@ import { promptSchema } from "@/zodSchemas/userPromptSchema";
 import axios from "axios";
 import { useState } from "react"
 import { z } from "zod";
-import useFetchRoadmaps from "./useFetchRoadmaps";
+import { toast } from "./use-toast";
 
 const useGenerateRoadmap = () => {
     const [loading, setLoading] = useState(false);
@@ -15,9 +15,17 @@ const useGenerateRoadmap = () => {
                 title : data.title,
                 duration : data.duration
             });
-            console.log(response);
-        } catch (error) {
-            console.log("Error in making call to generate roadmap", error);
+            toast({
+                title : "Success",
+                description : response.data.message,
+                variant : "default"
+            })
+        } catch (error : any) {
+            toast({
+                title : "Error",
+                description : error.data.message,
+                variant : "destructive"
+            })
         }finally{
             setLoading(false);
         }

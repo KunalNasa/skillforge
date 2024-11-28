@@ -7,14 +7,17 @@ import { StatusCodes } from "@/types/statusCodes";
 import connectDB from "@/lib/connectDB";
 import { User } from "@/types/user.types";
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
+    const session = await getServerSession(authOptions);
+    const userId = session?.user._id;
+    if(!userId){
+        return NextResponse.json<ApiResponse>({
+            success : false,
+            message : "Unauthorised request"
+        }, {status : StatusCodes.UNAUTHORIZED})
+    }
     try {
         await connectDB();
-        const { other_details, goal, current_status, profile_picture } = await request.json();
-
-        const session = await getServerSession(authOptions);
-        const userId = session?.user._id;
-
         const user = await UserModel.findById(userId);
 
         if (!user) {
@@ -24,17 +27,11 @@ export async function POST(request: NextRequest) {
             }, { status: StatusCodes.BAD_REQUEST })
         }
 
-        user.other_details = other_details;
-        user.goal = goal;
-        user.current_status = current_status;
-        user.profile_picture = profile_picture;
-
-        await user.save();
-
         return NextResponse.json<ApiResponse>({
             success: true,
             message: "User fields saved successfully",
-        })
+            user : user
+        }, {status : StatusCodes.OK});
 
     } catch (error) {
         console.log("Error saving user fields : " + error);
@@ -48,7 +45,6 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
     const session = await getServerSession(authOptions);
     const userId = session?.user._id;
-
 
     if (!userId) {
         return NextResponse.json<ApiResponse>({
