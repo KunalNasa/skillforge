@@ -6,16 +6,13 @@ import { StatusCodes } from "@/types/statusCodes";
 import { NextRequest, NextResponse } from "next/server";
 
 
-type Params = {
-    id: string;
-  };
-  
-export async function GET(request: NextRequest,{ params }: { params: Params }) {
+
+export async function GET(request: NextRequest,{ params }: { params: Promise<{ id: string }> }) {
 
     try {
         await connectDB();
 
-        const { id } = params; // roadmap id
+        const { id } = await params; // roadmap id
 
         const roadmap: Roadmap | null = await RoadmapModel.findById(id);
 

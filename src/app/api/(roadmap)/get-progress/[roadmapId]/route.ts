@@ -7,10 +7,8 @@ import { StatusCodes } from "@/types/statusCodes";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-type Params = {
-  roadmapId : string;
-}
-export async function GET(request: NextRequest,{ params }: { params: Params }) {
+
+export async function GET(request: NextRequest,{ params }: { params: Promise<{ roadmapId: string }> }) {
   const session = await getServerSession(authOptions);
   const userId = session?.user?._id;
 
@@ -25,7 +23,7 @@ export async function GET(request: NextRequest,{ params }: { params: Params }) {
   }
 
   try {
-    const { roadmapId } = params;
+    const { roadmapId } = await params;
     await connectDB();
 
     // Fetch roadmap and user in parallel

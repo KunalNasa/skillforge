@@ -7,10 +7,8 @@ import { StatusCodes } from "@/types/statusCodes";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-type Params = {
-  id : string;
-}
-export async function DELETE(request: NextRequest, { params }: { params: Params }) {
+
+export async function DELETE(request: NextRequest,{ params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions); 
   const userId = session?.user._id; 
 
@@ -23,7 +21,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Params 
 
   try {
     await connectDB();
-    const {id} = params;
+    const {id} = await params;
     if (!id) {
       return NextResponse.json<ApiResponse>({
         success: false,

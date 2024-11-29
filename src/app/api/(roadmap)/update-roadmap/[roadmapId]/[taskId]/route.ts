@@ -13,7 +13,7 @@ type Params = {
   taskId : string
 };
 
-export async function PATCH(request: NextRequest, { params }: { params: Params }) {
+export async function PATCH(request: NextRequest,{ params }: { params: Promise<{ roadmapId: string, taskId : string }> }) {
   const session = await getServerSession(authOptions);
   const userId = session?.user._id;
 
@@ -28,7 +28,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Params }
     await connectDB();
     const session = await getServerSession(authOptions);
     const userId = session?.user._id;
-    const { roadmapId, taskId } = params;
+    const { roadmapId, taskId } = await params;
     const roadmap = await RoadmapModel.findById(roadmapId);
     if (!roadmap) {
       return NextResponse.json<ApiResponse>({
