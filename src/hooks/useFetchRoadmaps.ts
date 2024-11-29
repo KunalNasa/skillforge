@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios'
 import { useState } from 'react';
 import { toast } from './use-toast';
@@ -25,7 +26,7 @@ const useFetchRoadmaps = () => {
         } catch (error : any) {
             toast({
                 title : "Error",
-                description : error.data.message,
+                description : error.data,
                 variant : "destructive"
             })
         }
