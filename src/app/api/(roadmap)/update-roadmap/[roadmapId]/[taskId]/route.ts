@@ -80,7 +80,8 @@ export async function PATCH(request: NextRequest, { params }: { params: { roadma
 
     return NextResponse.json<ApiResponse>({
       success: true,
-      message: "Successfully updated task"
+      message: "Successfully updated task",
+      roadmap
     }, { status: StatusCodes.CREATED });
   } catch (error) {
     console.log("Internal server error in update task", error);

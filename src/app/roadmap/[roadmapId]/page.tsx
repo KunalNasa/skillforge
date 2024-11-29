@@ -24,10 +24,10 @@ const page = ({ params }: { params: { roadmapId: string } }) => {
   const { fetchProgressFromDB } = useFetchProgress();
 
   const handleIsCompleted = async (taskId: string) => {
-    await markTaskASCompleted(taskId, roadmap?._id as string);
-    const progress = await fetchProgressFromDB(roadmap?._id as string);
-    setRoadmap({ ...roadmap, progress: progress } as Roadmap);
-    console.log(progress);
+    const updatedRoadmap = await markTaskASCompleted(taskId, roadmap?._id as string);
+    //const progress = await fetchProgressFromDB(roadmap?._id as string);
+    setRoadmap(updatedRoadmap);
+    // console.log(progress);
   }
 
 
@@ -93,7 +93,7 @@ const page = ({ params }: { params: { roadmapId: string } }) => {
       </div>
 
       <div className='text-neutral-500 text-center text-5xl'>
-        {roadmapData.title}
+        {roadmap?.title}
       </div>
       <div className='Progress p-5 mx-20 justify-center'>
         <p className='text-2xl my-2 font-semibold'>Your Progress</p>
