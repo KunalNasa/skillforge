@@ -7,61 +7,61 @@ import { StatusCodes } from "@/types/statusCodes";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
-    const session = await getServerSession(authOptions); 
-    const userId = session?.user._id; 
+export async function DELETE(request: NextRequest) {
+  const session = await getServerSession(authOptions); 
+  const userId = session?.user._id; 
 
-    if (!userId) {
-      return NextResponse.json<ApiResponse>({
-        success : false,
-        message : "Unauthorised User"
-      }, { status: StatusCodes.UNAUTHORIZED});
-    }
+  if (!userId) {
+    return NextResponse.json<ApiResponse>({
+      success: false,
+      message: "Unauthorized User",
+    }, { status: StatusCodes.UNAUTHORIZED });
+  }
+
   try {
-    await connectDB(); 
+    await connectDB();
 
-    const { id } = params; // Roadmap ID
+    // Get the roadmap ID from the request URL
+    const id = request.nextUrl.searchParams.get("id"); // Extract 'id' from the query params
     if (!id) {
-        return NextResponse.json<ApiResponse>({
-            success : false,
-            message : "Roadmap ID is required"
-        }, {status : StatusCodes.BAD_REQUEST}) 
+      return NextResponse.json<ApiResponse>({
+        success: false,
+        message: "Roadmap ID is required",
+      }, { status: StatusCodes.BAD_REQUEST });
     }
-
-    
 
     // Find the user and remove the roadmap with the specified ID from their `roadmaps` array
     const user = await UserModel.findOneAndUpdate(
-      { _id: userId }, 
+      { _id: userId },
       { $pull: { roadmaps: { _id: id } } }, // Remove the roadmap by its ID
       { new: true }
     );
 
     if (!user) {
       return NextResponse.json<ApiResponse>({
-        success : false,
-        message: "User not found"
-        }, { status: StatusCodes.NOT_FOUND });
+        success: false,
+        message: "User not found",
+      }, { status: StatusCodes.NOT_FOUND });
     }
 
     const deleteRoadmapFromModel = await RoadmapModel.findByIdAndDelete(id);
-    if(!deleteRoadmapFromModel){
-        return NextResponse.json<ApiResponse>({
-            success : false,
-            message : "Failed to delete Roadmap"
-        }, {status : StatusCodes.BAD_REQUEST});
+    if (!deleteRoadmapFromModel) {
+      return NextResponse.json<ApiResponse>({
+        success: false,
+        message: "Failed to delete Roadmap",
+      }, { status: StatusCodes.BAD_REQUEST });
     }
 
     return NextResponse.json<ApiResponse>({
-        success : true,
-        message: "Roadmap deleted successfully" 
+      success: true,
+      message: "Roadmap deleted successfully",
     }, { status: StatusCodes.OK });
 
   } catch (error) {
     console.error("Error deleting roadmap:", error);
-    return NextResponse.json<ApiResponse>({ 
-        success : false,
-        message: "Internal Server Error"
+    return NextResponse.json<ApiResponse>({
+      success: false,
+      message: "Internal Server Error",
     }, { status: StatusCodes.INTERNAL_SERVER_ERROR });
   }
 }
