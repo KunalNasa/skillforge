@@ -1,6 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import connectDB from "@/lib/connectDB";
 import { RoadmapModel } from "@/models/roadmap.model";
+import UserModel from "@/models/user.model";
 import { ApiResponse } from "@/types/api-response.types";
 import { StatusCodes } from "@/types/statusCodes";
 import { getServerSession } from "next-auth";
@@ -19,6 +20,8 @@ export async function PATCH(request: NextRequest, { params }: { params: { roadma
 
   try {
     await connectDB();
+    const session = await getServerSession(authOptions);
+    const userId = session?.user._id;
     const { roadmapId, taskId } = params;
     const roadmap = await RoadmapModel.findById(roadmapId);
     if (!roadmap) {
@@ -71,6 +74,14 @@ export async function PATCH(request: NextRequest, { params }: { params: { roadma
     roadmap.progress = progress;
 
     await roadmap.save();
+    const user = await UserModel.findById(userId);
+    user?.roadmaps.map((roadmap) => {
+      if (roadmap._id == roadmapId) {
+        roadmap.progress = progress;
+      }
+    })
+    await user?.save();
+
     // if (!updatedRoadmap) {
     //   return NextResponse.json<ApiResponse>({
     //     success: false,

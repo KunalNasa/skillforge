@@ -30,10 +30,10 @@ export async function GET(request: NextRequest) {
 
         const roadmapArray = user.roadmaps;
 
-        for (let i = 0; i < roadmapArray.length; i++) {
-            const roadmap = await RoadmapModel.findById(roadmapArray[i]._id);
-            roadmapArray[i].progress = roadmap?.progress;
-        }
+        // for (let i = 0; i < roadmapArray.length; i++) {
+        //     const roadmap = await RoadmapModel.findById(roadmapArray[i]._id);
+        //     roadmapArray[i].progress = roadmap?.progress;
+        // }
 
         console.log(roadmapArray)
 
