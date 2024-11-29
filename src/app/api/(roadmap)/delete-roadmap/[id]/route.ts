@@ -7,7 +7,10 @@ import { StatusCodes } from "@/types/statusCodes";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(request: NextRequest) {
+type Params = {
+  id : string;
+}
+export async function DELETE(request: NextRequest, { params }: { params: Params }) {
   const session = await getServerSession(authOptions); 
   const userId = session?.user._id; 
 
@@ -20,9 +23,7 @@ export async function DELETE(request: NextRequest) {
 
   try {
     await connectDB();
-
-    // Get the roadmap ID from the request URL
-    const id = request.nextUrl.searchParams.get("id"); // Extract 'id' from the query params
+    const {id} = params;
     if (!id) {
       return NextResponse.json<ApiResponse>({
         success: false,

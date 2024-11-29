@@ -7,7 +7,13 @@ import { StatusCodes } from "@/types/statusCodes";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function PATCH(request: NextRequest, { params }: { params: { roadmapId: string; taskId: string } }) {
+
+type Params = {
+  roadmapId: string;
+  taskId : string
+};
+
+export async function PATCH(request: NextRequest, { params }: { params: Params }) {
   const session = await getServerSession(authOptions);
   const userId = session?.user._id;
 

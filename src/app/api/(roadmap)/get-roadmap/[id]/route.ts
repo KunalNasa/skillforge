@@ -3,9 +3,14 @@ import { RoadmapModel } from "@/models/roadmap.model";
 import { ApiResponse } from "@/types/api-response.types";
 import { Roadmap } from "@/types/roadmap.types";
 import { StatusCodes } from "@/types/statusCodes";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+
+type Params = {
+    id: string;
+  };
+  
+export async function GET(request: NextRequest,{ params }: { params: Params }) {
 
     try {
         await connectDB();
