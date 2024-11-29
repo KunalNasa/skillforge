@@ -1,13 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client'
 import Header from '@/components/Header'
 import PageEnd from '@/components/PageEnd'
 import CreateRoadmap from '@/components/roadmapPages/CreateRoadmap';
 import DisplayRoadmaps from '@/components/roadmapPages/DisplayRoadmaps';
-import { Progress } from '@/components/ui/progress';
 import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react'
-
 const page = () => {
   const { data: session } = useSession();
   const user : User = session?.user as User;

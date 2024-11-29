@@ -13,6 +13,7 @@ import { User } from "@/types/user.types"
 const UserProfile = () => {
     const [dbUser, setDbUser] = useState<User>();
     const [toggle, setToggle] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {loading, fetchUserDetails, updateUserDetails} = useUserData();
     useEffect(() => {
         const callFetchDetails = async () => {
@@ -27,9 +28,9 @@ const UserProfile = () => {
     const form = useForm<z.infer<typeof userProfileSchema>>({
         resolver : zodResolver(userProfileSchema),
         defaultValues : {
-            username : "",
-            goal : "",
-            other_details : "",
+            username : dbUser?.username || "",
+            goal : dbUser?.goal || "",
+            other_details : dbUser?.other_details || "",
             current_status : "Beginner" 
         }
     })
@@ -37,7 +38,6 @@ const UserProfile = () => {
     <div className="border-2 rounded-md w-full h-full">
         {toggle ? <Form {...form}>
             <form className="p-6 rounded-lg shadow-lg mx-auto" onSubmit={form.handleSubmit(onSubmit)}>
-                
                 <FormField
                     name="username"
                     control={form.control}

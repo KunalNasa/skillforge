@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { promptSchema } from "@/zodSchemas/userPromptSchema";
 import axios from "axios";
 import { useState } from "react"
@@ -20,6 +21,7 @@ const useGenerateRoadmap = () => {
                 description : response.data.message,
                 variant : "default"
             })
+            window.location.reload();
         } catch (error : any) {
             toast({
                 title : "Error",

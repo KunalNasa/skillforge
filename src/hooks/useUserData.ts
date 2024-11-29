@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { userProfileSchema } from "@/zodSchemas/userProfileSchema";
 import axios from "axios";
 import { useState } from "react"
@@ -34,6 +35,7 @@ const useUserData = () => {
                 description : response.data.message,
                 variant : "default"
             })
+            window.location.reload();
         } catch (error : any) {
             toast({
                 title : "Error",

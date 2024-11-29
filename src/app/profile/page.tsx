@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client'
 import Header from "@/components/Header"
 import PageEnd from "@/components/PageEnd"

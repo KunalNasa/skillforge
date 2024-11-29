@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 import Header from '@/components/Header';
 import PageEnd from '@/components/PageEnd';
@@ -11,12 +12,15 @@ import useMarkTaskAsCompleted from '@/hooks/useMarkTaskAsCompleted';
 import { Roadmap } from '@/types/roadmap.types';
 import { roadmapGraphType } from '@/types/roadmapGraph.types';
 import { Task } from '@/types/task.types';
-import { set } from 'mongoose';
 import Link from 'next/link';
-import React, { use, useEffect, useState } from 'react'
+import { useParams } from 'next/navigation';
+// import { useParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
 import { GoLinkExternal } from "react-icons/go";
 
-const page = ({ params }: { params: { roadmapId: string } }) => {
+const page = () => {
+  const params = useParams();
+  const {roadmapId} = params;
   const [modifiedDataForTimeline, setmodifiedDataForTimeline] = useState<roadmapGraphType[]>([]);
   const [roadmap, setRoadmap] = useState<Roadmap>();
 
@@ -33,13 +37,13 @@ const page = ({ params }: { params: { roadmapId: string } }) => {
 
 
   // fetching roadmap data from the server
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { fetchSingleRoadmapFromDB, loading } = useFetchSingleRoadmap();
 
   useEffect(() => {
 
     const fetchSingleRoadmap = async () => {
-      const { roadmapId } = params;
-      const data = await fetchSingleRoadmapFromDB(roadmapId)
+      const data = await fetchSingleRoadmapFromDB(roadmapId as string)
       const modifiedData = data.tasks.map((task: Task) => { // parsing server response to Timeline component prop
         return {
           title: task.title,

@@ -12,6 +12,7 @@ import Image from "next/image"
 
 const RoadmapCards = () => {
     const [roadmaps, setRoadmaps] = useState<[Roadmap] | []>([]);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {fetchRoadmapsFromDB,loading} = useFetchRoadmaps();
     const router = useRouter();
     const fetchRoadmaps = useCallback(async () => {
@@ -29,9 +30,11 @@ const RoadmapCards = () => {
         </div>
       {roadmaps.length === 0 ? 
       <div className="border-2 my-2 p-5 rounded-md">
-        <h3 className="text-xl font-semibold text-gray-300 py-5">You haven't created any roadmap yet !!</h3>
+        <h3 className="text-xl font-semibold text-gray-300 py-5">You haven&apos;t created any roadmap yet !!</h3>
         <Image className="mx-auto" width={300} height={300} src="/Images/roadmapsNotFound.svg" alt="Not Found!!" />
-      </div> : (roadmaps.map((item, index) => (
+      </div> : (   
+        <div className="flex flex-wrap"> 
+                {roadmaps.map((item, index) => (
                     <Card key={index} onClick={() => {router.replace(`/roadmap/${item._id}`)}} className="w-1/4 m-4 bg-gray-950 text-white">
                     <CardTitle className="p-5 text-2xl font-semibold text-gradient">{item.title}</CardTitle>
                     <CardContent className="text-gray-300 flex flex-col font-semibold">
@@ -52,7 +55,9 @@ const RoadmapCards = () => {
                     </CardFooter>
                     <Tooltip id={`${item._id}`} />
                 </Card>
-                )))}
+                ))}
+                </div>
+            )}
     </div>
   )
 }

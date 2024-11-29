@@ -40,6 +40,8 @@ export async function GET(request:NextRequest, {params} : {params : {roadmapId :
         let progress;
         if(totalTasks > 0){
             progress = (completedTask/totalTasks)*100;
+            roadmap.progress = Math.floor(progress);
+            await roadmap.save();
         }else{
             return NextResponse.json<ApiResponse>({
                 success : false,
