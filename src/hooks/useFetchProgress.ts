@@ -10,14 +10,19 @@ const useFetchProgress = () => {
         setLoading(true);
         try {
             const res = await axios.get(`/api/get-progress/${roadmapId}`);
-            return res.data.progress;
-        } catch (error : any) {
             toast({
-                title : "Error",
-                description : error.data,
-                variant : "destructive"
+                title: "Success",
+                description: "progress fetched successfully",
+                variant: "default",
             })
-        }finally{
+            return res.data.progress;
+        } catch (error: any) {
+            toast({
+                title: "Error",
+                description: error.data,
+                variant: "destructive"
+            })
+        } finally {
             setLoading(false);
         }
     }

@@ -23,15 +23,17 @@ const page = () => {
   const {roadmapId} = params;
   const [modifiedDataForTimeline, setmodifiedDataForTimeline] = useState<roadmapGraphType[]>([]);
   const [roadmap, setRoadmap] = useState<Roadmap>();
+  const [trigger, setTrigger] = useState<boolean>(false);
 
   const { markTaskASCompleted } = useMarkTaskAsCompleted();
   const { fetchProgressFromDB } = useFetchProgress();
 
   const handleIsCompleted = async (taskId: string) => {
-    await markTaskASCompleted(taskId, roadmap?._id as string);
-    const progress = await fetchProgressFromDB(roadmap?._id as string);
-    setRoadmap({ ...roadmap, progress: progress } as Roadmap);
-    console.log(progress);
+    const updatedRoadmap = await markTaskASCompleted(taskId, roadmap?._id as string);
+    //const progress = await fetchProgressFromDB(roadmap?._id as string);
+    setRoadmap(updatedRoadmap);
+    setTrigger(!trigger);
+    // console.log(progress);
   }
 
 
@@ -64,7 +66,8 @@ const page = () => {
               })}
             </div>
           ),
-          _id: task._id
+          _id: task._id,
+          is_completed: task.is_completed
         }
       })
 
@@ -76,7 +79,7 @@ const page = () => {
     }
 
     fetchSingleRoadmap();
-  }, [])
+  }, [trigger])
 
 
 
@@ -97,7 +100,7 @@ const page = () => {
       </div>
 
       <div className='text-neutral-500 text-center text-5xl'>
-        {roadmapData.title}
+        {roadmap?.title}
       </div>
       <div className='Progress p-5 mx-20 justify-center'>
         <p className='text-2xl my-2 font-semibold'>Your Progress</p>

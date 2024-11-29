@@ -14,6 +14,7 @@ const useMarkTaskAsCompleted = () => {
                 description: res.data.message,
                 variant: "default"
             });
+            return res.data.roadmap;
         } catch (error: any) {
             console.log("Error marking task as completed : " + error);
             toast({
