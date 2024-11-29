@@ -8,6 +8,7 @@ import { Card, CardContent, CardFooter, CardTitle } from "../ui/card";
 import { Progress } from "../ui/progress";
 import { Tooltip } from "react-tooltip";
 import { useRouter } from "next/navigation";
+import Loader from "../Loader";
 
 const DisplayRoadmaps = () => {
     const router = useRouter();
@@ -23,6 +24,7 @@ const DisplayRoadmaps = () => {
     console.log(roadmaps[0]);
     return (
         <div className="MainContainer">
+            {loading && <Loader />}
             <div>
                 <h2 className="text-5xl font-bold text-gradient p-5 m-5 mb-2 pb-2">Your Roadmaps</h2>
                 <Separator />

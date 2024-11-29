@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 import Header from '@/components/Header';
+import Loader from '@/components/Loader';
 import PageEnd from '@/components/PageEnd';
 import RoadmapVisualization from '@/components/roadmapPages/roadmapShort';
 import { Progress } from '@/components/ui/progress';
@@ -19,12 +20,12 @@ import { GoLinkExternal } from "react-icons/go";
 
 const page = () => {
   const params = useParams();
-  const {roadmapId} = params;
+  const { roadmapId } = params;
   const [modifiedDataForTimeline, setmodifiedDataForTimeline] = useState<roadmapGraphType[]>([]);
   const [roadmap, setRoadmap] = useState<Roadmap>();
   const [trigger, setTrigger] = useState<boolean>(false);
 
-  const { markTaskASCompleted } = useMarkTaskAsCompleted();
+  const { markTaskASCompleted, loading } = useMarkTaskAsCompleted();
   // const { fetchProgressFromDB } = useFetchProgress();
 
   const handleIsCompleted = async (taskId: string) => {
@@ -39,7 +40,7 @@ const page = () => {
 
   // fetching roadmap data from the server
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { fetchSingleRoadmapFromDB, loading } = useFetchSingleRoadmap();
+  const { fetchSingleRoadmapFromDB, loadingRoadmap } = useFetchSingleRoadmap();
 
   useEffect(() => {
 
@@ -86,6 +87,7 @@ const page = () => {
   return (
     <div className="w-full flex  flex-col align-middle">
       <Header />
+      {(loading || loadingRoadmap) && <Loader />}
       <div className=" w-3/5 flex flex-col mx-auto text-center">
         <div className="text-7xl font-bold py-5">
           Shaping Your Future With <span className=" text-gradient">AI-Powered</span> Precision

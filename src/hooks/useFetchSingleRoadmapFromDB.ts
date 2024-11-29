@@ -4,7 +4,7 @@ import { toast } from "./use-toast";
 
 const useFetchSingleRoadmap = () => {
 
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loadingRoadmap, setLoading] = useState<boolean>(false);
 
     const fetchSingleRoadmapFromDB = async (roadmapId: string) => {
         try {
@@ -32,7 +32,7 @@ const useFetchSingleRoadmap = () => {
         }
     }
 
-    return { fetchSingleRoadmapFromDB, loading };
+    return { fetchSingleRoadmapFromDB, loadingRoadmap };
 }
 
 export default useFetchSingleRoadmap;
