@@ -6,6 +6,7 @@ import { StatusCodes } from "@/types/statusCodes";
 import connectDB from "@/lib/connectDB";
 import UserModel from "@/models/user.model";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(request:NextRequest) {
     const session = await getServerSession(authOptions);
     const userId = session?.user._id;

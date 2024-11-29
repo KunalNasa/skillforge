@@ -5,8 +5,7 @@ import PageEnd from '@/components/PageEnd';
 import RoadmapVisualization from '@/components/roadmapPages/roadmapShort';
 import { Progress } from '@/components/ui/progress';
 import { Timeline } from '@/components/ui/timeline';
-import { roadmapData } from '@/helpers/data';
-import useFetchProgress from '@/hooks/useFetchProgress';
+// import useFetchProgress from '@/hooks/useFetchProgress';
 import useFetchSingleRoadmap from '@/hooks/useFetchSingleRoadmapFromDB';
 import useMarkTaskAsCompleted from '@/hooks/useMarkTaskAsCompleted';
 import { Roadmap } from '@/types/roadmap.types';
@@ -26,7 +25,7 @@ const page = () => {
   const [trigger, setTrigger] = useState<boolean>(false);
 
   const { markTaskASCompleted } = useMarkTaskAsCompleted();
-  const { fetchProgressFromDB } = useFetchProgress();
+  // const { fetchProgressFromDB } = useFetchProgress();
 
   const handleIsCompleted = async (taskId: string) => {
     const updatedRoadmap = await markTaskASCompleted(taskId, roadmap?._id as string);

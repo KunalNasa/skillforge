@@ -8,7 +8,9 @@ const useFetchRoadmaps = () => {
         setLoading(true);
         try {
             const response = await axios.get('/api/get-all-roadmaps');
+            console.log(response.data.allRoadmaps[0]);
             return response.data.allRoadmaps;
+            
         } catch (error : any) {
             toast({
                 title : "Error",
