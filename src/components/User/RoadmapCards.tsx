@@ -13,7 +13,6 @@ import Loader from "../Loader"
 
 const RoadmapCards = () => {
     const [roadmaps, setRoadmaps] = useState<[Roadmap] | []>([]);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { fetchRoadmapsFromDB, loading } = useFetchRoadmaps();
     const router = useRouter();
     const fetchRoadmaps = useCallback(async () => {

@@ -14,7 +14,6 @@ import Loader from "../Loader"
 const UserProfile = () => {
     const [dbUser, setDbUser] = useState<User>();
     const [toggle, setToggle] = useState(false);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { loading, fetchUserDetails, updateUserDetails } = useUserData();
     useEffect(() => {
         const callFetchDetails = async () => {
