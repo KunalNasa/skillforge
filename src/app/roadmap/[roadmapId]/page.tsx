@@ -19,6 +19,7 @@ import { GoLinkExternal } from "react-icons/go";
 const page = ({ params }: { params: { roadmapId: string } }) => {
   const [modifiedDataForTimeline, setmodifiedDataForTimeline] = useState<roadmapGraphType[]>([]);
   const [roadmap, setRoadmap] = useState<Roadmap>();
+  const [trigger, setTrigger] = useState<boolean>(false);
 
   const { markTaskASCompleted } = useMarkTaskAsCompleted();
   const { fetchProgressFromDB } = useFetchProgress();
@@ -27,6 +28,7 @@ const page = ({ params }: { params: { roadmapId: string } }) => {
     const updatedRoadmap = await markTaskASCompleted(taskId, roadmap?._id as string);
     //const progress = await fetchProgressFromDB(roadmap?._id as string);
     setRoadmap(updatedRoadmap);
+    setTrigger(!trigger);
     // console.log(progress);
   }
 
@@ -60,7 +62,8 @@ const page = ({ params }: { params: { roadmapId: string } }) => {
               })}
             </div>
           ),
-          _id: task._id
+          _id: task._id,
+          is_completed: task.is_completed
         }
       })
 
@@ -72,7 +75,7 @@ const page = ({ params }: { params: { roadmapId: string } }) => {
     }
 
     fetchSingleRoadmap();
-  }, [])
+  }, [trigger])
 
 
 
