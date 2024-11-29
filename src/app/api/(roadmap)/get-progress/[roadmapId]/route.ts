@@ -73,12 +73,20 @@ export async function GET(request: NextRequest, { params }: { params: { roadmapI
     await roadmap.save();
 
     // Update user's roadmap progress
-    const userRoadmap = user.roadmaps?.find(r => r._id.toString() === roadmapId.toString());
-    if (userRoadmap) {
-      userRoadmap.progress = progress;
-      await user.save();
+    // const userRoadmap = user.roadmaps?.find(r => r._id.toString() === roadmapId.toString());
+    // if (userRoadmap) {
+    //   userRoadmap.progress = progress;
+    //   await user.save();
+    // }
+    let index = 0;
+    while(index < user.roadmaps.length){
+        if(user.roadmaps[index]._id.toString() === roadmapId.toString()){
+            user.roadmaps[index].progress = progress;
+            await user.save();
+            break;
+        }
+        index++;
     }
-
     return NextResponse.json<ApiResponse>(
       {
         success: true,
