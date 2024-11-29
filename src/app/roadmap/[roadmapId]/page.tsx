@@ -39,7 +39,6 @@ const page = () => {
 
 
   // fetching roadmap data from the server
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { fetchSingleRoadmapFromDB, loadingRoadmap } = useFetchSingleRoadmap();
 
   useEffect(() => {

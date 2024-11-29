@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { userProfileSchema } from "@/zodSchemas/userProfileSchema";
 import axios from "axios";
 import { useState } from "react"

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { promptSchema } from "@/zodSchemas/userPromptSchema";
 import axios from "axios";
 import { useState } from "react"
