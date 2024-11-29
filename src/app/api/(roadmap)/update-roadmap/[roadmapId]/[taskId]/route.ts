@@ -7,53 +7,68 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(request: NextRequest, { params }: { params: { roadmapId: string; taskId: string } }) {
-    const session = await getServerSession(authOptions); 
-    const userId = session?.user._id; 
+  const session = await getServerSession(authOptions);
+  const userId = session?.user._id;
 
-    if (!userId) {
+  if (!userId) {
+    return NextResponse.json<ApiResponse>({
+      success: false,
+      message: "Unauthorised User"
+    }, { status: StatusCodes.UNAUTHORIZED });
+  }
+
+  try {
+    await connectDB();
+    const { roadmapId, taskId } = params;
+    const roadmap = await RoadmapModel.findById(roadmapId);
+    if (!roadmap) {
       return NextResponse.json<ApiResponse>({
-        success : false,
-        message : "Unauthorised User"
-      }, { status: StatusCodes.UNAUTHORIZED});
+        success: false,
+        message: "Roadmap not found"
+      }, { status: StatusCodes.NOT_FOUND });
     }
+    // const updatedRoadmap = await RoadmapModel.findOneAndUpdate(
+    //   { _id: roadmapId, "tasks._id": taskId }, // Match the roadmap and task ID
+    //   [
+    //     {
+    //       $set: {
+    //         "tasks.$": {
+    //           $mergeObjects: [
+    //             "$tasks.$",
+    //             {
+    //               is_completed: { $not: "$tasks.$.is_completed" }
+    //             }
+    //           ]
+    //         }
+    //       }
+    //     }
+    //   ],
+    //   { new: true } // Return the updated roadmap
+    // );
 
-    try {
-        await connectDB();
-        const {roadmapId, taskId} = params;
-        const roadmap = await RoadmapModel.findById(roadmapId);
-        if(!roadmap){
-            return NextResponse.json<ApiResponse>({
-                success : false,
-                message : "Roadmap not found"
-            }, {status : StatusCodes.NOT_FOUND});
-        }
-        const updatedRoadmap = await RoadmapModel.findOneAndUpdate(
-            { _id: roadmapId, "tasks._id": taskId }, // Match the roadmap and task ID
-            [
-              {
-                $set: {
-                  "tasks.$.is_completed": { $not: "$tasks.$.is_completed" }, // Toggle the value
-                },
-              },
-            ],
-            { new: true } // Return the updated roadmap
-        );
-        if(!updatedRoadmap){
-            return NextResponse.json<ApiResponse>({
-                success : false,
-                message : "Roadmap or Task Not found"
-            }, {status : StatusCodes.NOT_FOUND})
-        }
+    roadmap.tasks.map((task) => {
+      if (task._id == taskId) {
+        task.is_completed = !task.is_completed;
+      }
+    })
 
-        return NextResponse.json<ApiResponse>({
-            success : true,
-            message : "Successfully updated task"
-        }, {status : StatusCodes.CREATED});
-    } catch (error) {
-        console.log("Internal server error in update task", error);
-        return NextResponse.json<ApiResponse>({
-            success : false,
-            message : "Internal server error"
-        }, {status : StatusCodes.INTERNAL_SERVER_ERROR})
-    }
+    await roadmap.save();
+    // if (!updatedRoadmap) {
+    //   return NextResponse.json<ApiResponse>({
+    //     success: false,
+    //     message: "Roadmap or Task Not found"
+    //   }, { status: StatusCodes.NOT_FOUND })
+    // }
+
+    return NextResponse.json<ApiResponse>({
+      success: true,
+      message: "Successfully updated task"
+    }, { status: StatusCodes.CREATED });
+  } catch (error) {
+    console.log("Internal server error in update task", error);
+    return NextResponse.json<ApiResponse>({
+      success: false,
+      message: "Internal server error"
+    }, { status: StatusCodes.INTERNAL_SERVER_ERROR })
+  }
 }

@@ -48,13 +48,15 @@ export async function POST(request: Request) {
         })
 
         await roadmap.save();
+        user.roadmaps.push(roadmap); // add roadmap to user roadmaps
+        await user.save(); // save user
+
 
 
 
         return NextResponse.json<ApiResponse>({ //roadmap successfully generated
             success: true,
-            message: "Roadmap successfully generated, Please confirm the roadmap",
-            roadmap: roadmap
+            message: "Roadmap successfully generated",
         }, { status: StatusCodes.CREATED })
 
     } catch (error) {
