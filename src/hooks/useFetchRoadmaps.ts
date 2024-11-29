@@ -8,36 +8,31 @@ const useFetchRoadmaps = () => {
         setLoading(true);
         try {
             const response = await axios.get('/api/get-all-roadmaps');
-            console.log(response.data.allRoadmaps[0]);
             return response.data.allRoadmaps;
-<<<<<<< HEAD
-        } catch (error: any) {
-=======
             
         } catch (error : any) {
->>>>>>> 3ce77ba6152f1b98232749df5b2a29c39c3cdb52
             toast({
-                title: "Error",
-                description: error.data.message,
-                variant: "destructive"
+                title : "Error",
+                description : error.data.message,
+                variant : "destructive"
             })
-        } finally {
+        }finally{
             setLoading(false);
         }
-    }
-    const fetchRoadmapDataFromDB = async (id: string) => {
+    } 
+    const fetchRoadmapDataFromDB = async (id : string) => {
         try {
             const response = await axios.get(`/api/get-roadmap/${id}`);
             return response.data.roadmap;
-        } catch (error: any) {
+        } catch (error : any) {
             toast({
-                title: "Error",
-                description: error.data,
-                variant: "destructive"
+                title : "Error",
+                description : error.data,
+                variant : "destructive"
             })
         }
     }
-    return { fetchRoadmapsFromDB, loading, fetchRoadmapDataFromDB };
+    return {fetchRoadmapsFromDB, loading, fetchRoadmapDataFromDB};
 }
 
 export default useFetchRoadmaps
