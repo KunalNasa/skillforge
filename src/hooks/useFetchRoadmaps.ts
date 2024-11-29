@@ -18,7 +18,19 @@ const useFetchRoadmaps = () => {
             setLoading(false);
         }
     } 
-    return {fetchRoadmapsFromDB, loading};
+    const fetchRoadmapDataFromDB = async (id : string) => {
+        try {
+            const response = await axios.get(`/api/get-roadmap/${id}`);
+            return response.data.roadmap;
+        } catch (error : any) {
+            toast({
+                title : "Error",
+                description : error.data.message,
+                variant : "destructive"
+            })
+        }
+    }
+    return {fetchRoadmapsFromDB, loading, fetchRoadmapDataFromDB};
 }
 
 export default useFetchRoadmaps

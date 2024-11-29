@@ -1,21 +1,29 @@
 'use client'
 import Header from "@/components/Header"
 import PageEnd from "@/components/PageEnd"
-import DisplayRoadmaps from "@/components/roadmapPages/DisplayRoadmaps";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button";
+import RoadmapCards from "@/components/User/RoadmapCards";
 import UserProfile from "@/components/User/UserProfile";
+import { fact as factFromArr } from "@/helpers/roadmapFacts";
 import { User } from "next-auth";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 const page = () => {
     const { data: session } = useSession();
     const user : User = session?.user as User;
-    console.log(user);
+    const [fact , setFact] = useState<string>("");
+    // to resolve hydration error
+    useEffect(() => {
+        setFact(factFromArr);
+    }, [])
   return (
     <div className="MainContainer">
         <Header/>
         <div className="WholePage flex">
-            <div className="flex border-2 rounded-md m-1 flex-col p-10 w-3/12">
+            <div className="flex rounded-md m-1 flex-col p-10 w-3/12">
                 <Avatar>
                     <AvatarImage src="https://github.com/shadcn.png" />
                     <AvatarFallback>CN</AvatarFallback>
@@ -37,9 +45,34 @@ const page = () => {
                             : 'No date available'}
                     </p>
                 </div>
+                <div className="p-2">
+                <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                        <Button className="hover:bg-red-600 font-semibold hover:text-gray-300" variant="outline">Log Out</Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            This will Log you out of your account
+                        </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => signOut()}>Continue</AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                    </AlertDialog>
+                </div>
             </div>
-            <div className="w-9/12 m-1">
+            <div className="w-9/12 m-1 flex flex-col">
+                <h1 className="text-3xl font-semibold text-gradient py-4">Your Profile</h1>
                 <UserProfile/>
+                <RoadmapCards/>
+                <div>
+                    <h2 className="text-2xl font-semibold text-gradient pt-5 pb-2">Facts</h2>
+                    <p className="text-gray-300 pb-4 font-semibold font-mono">{fact}</p>
+                </div>
             </div>
         </div>
         <PageEnd/>
