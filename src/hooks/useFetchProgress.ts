@@ -1,15 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import { useState } from "react";
+import { toast } from "./use-toast";
 
 const useFetchProgress = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const fetchProgressFromDB = async (roadmapId: string) => {
+        setLoading(true);
         try {
             const res = await axios.get(`/api/get-progress/${roadmapId}`);
             return res.data.progress;
-        } catch (error) {
-
+        } catch (error : any) {
+            toast({
+                title : "Error",
+                description : error.data,
+                variant : "destructive"
+            })
+        }finally{
+            setLoading(false);
         }
     }
 
