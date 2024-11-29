@@ -38,7 +38,7 @@ const page = ({ params }: { params: { roadmapId: string } }) => {
   useEffect(() => {
 
     const fetchSingleRoadmap = async () => {
-      const { roadmapId } = await params;
+      const { roadmapId } = params;
       const data = await fetchSingleRoadmapFromDB(roadmapId)
       const modifiedData = data.tasks.map((task: Task) => { // parsing server response to Timeline component prop
         return {
@@ -66,6 +66,9 @@ const page = ({ params }: { params: { roadmapId: string } }) => {
 
       setRoadmap(data);
       setmodifiedDataForTimeline(modifiedData);
+
+      // const progress = await fetchProgressFromDB(roadmapId);
+      // setRoadmap({ ...roadmap, progress: progress } as Roadmap);
     }
 
     fetchSingleRoadmap();
