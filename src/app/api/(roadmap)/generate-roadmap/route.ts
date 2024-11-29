@@ -15,12 +15,17 @@ function removeJsonPrefix(input: string) {
 }
 
 export async function POST(request: Request) {
+    const session = await getServerSession(authOptions);
+    const userId = session?.user._id;
+    if(!userId){
+        return NextResponse.json<ApiResponse>({
+            success : false,
+            message : "Unatuhorised request"
+        }, {status : StatusCodes.UNAUTHORIZED});
+    }
     try {
-        const session = await getServerSession(authOptions);
-        const userId = session?.user._id;
-
+        
         const user = await UserModel.findById(userId);
-
         if (!user) {
             return NextResponse.json<ApiResponse>({
                 success: false,
@@ -38,22 +43,20 @@ export async function POST(request: Request) {
 
         const jsonData = parseRawToJson(updatedResponseText); //parse gemini response to json object
         const roadmap_tasks = JSON.stringify(jsonData, null, 2); // json object to js 
-        console.log(JSON.parse(roadmap_tasks));
-
+        // console.log(JSON.parse(roadmap_tasks));
 
         const roadmap = new RoadmapModel<Roadmap>({
             title,
             duration,
             tasks: JSON.parse(roadmap_tasks)
         })
-
         await roadmap.save();
-
-
+        user.roadmaps.push(roadmap); // add roadmap to user roadmaps
+        await user.save(); // save user
 
         return NextResponse.json<ApiResponse>({ //roadmap successfully generated
             success: true,
-            message: "Roadmap successfully generated, Please confirm the roadmap",
+            message: "Roadmap successfully generated",
             roadmap: roadmap
         }, { status: StatusCodes.CREATED })
 

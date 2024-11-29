@@ -35,8 +35,8 @@ export async function GET(request: Request, { params }: { params: { id: string }
         }
 
 
-        user.roadmaps.push(roadmap); // add roadmap to user roadmaps
-        await user.save(); // save user
+        // user.roadmaps.push(roadmap); // add roadmap to user roadmaps
+        // await user.save(); // save user
 
         return Response.json({
             success: true,
