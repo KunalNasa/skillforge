@@ -22,7 +22,7 @@ export function CardDemo({title, heading, avatar, content} : props) {
             height="100"
             width="100"
             alt="Avatar"
-            src={`/CardImages/${avatar}`}
+            src={`/Images/${avatar}`}
             className="h-10 w-10 rounded-full border-2 object-cover"
           />
           <div className="flex flex-col">
