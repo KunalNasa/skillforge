@@ -6,7 +6,6 @@ import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import UserModel from "@/models/user.model";
 import { generatePromptForGemini } from "@/lib/generatePromptForGemini";
-import { Roadmap } from "@/types/roadmap.types";
 import { RoadmapModel } from "@/models/roadmap.model";
 import { parseRawToJson } from "@/lib/geminiOpToJSObject";
 
@@ -45,12 +44,11 @@ export async function POST(request: Request) {
         const roadmap_tasks = JSON.stringify(jsonData, null, 2); // json object to js 
         // console.log(JSON.parse(roadmap_tasks));
 
-        const roadmap = new RoadmapModel<Roadmap>({
+        const roadmap = await RoadmapModel.create({
             title,
             duration,
             tasks: JSON.parse(roadmap_tasks)
         })
-        await roadmap.save();
         user.roadmaps.push(roadmap); // add roadmap to user roadmaps
         await user.save(); // save user
 

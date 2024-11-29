@@ -34,10 +34,10 @@ const DisplayRoadmaps = () => {
             <Separator/>
         </div>
             {roadmaps.length === 0 ?
-            <div className="h-[60vh]">
+            <div className="min-h-[60vh]">
                 <h4 className="text-4xl font-semibold m-5 p-5">No Roadmaps to Display, Please Create One</h4>
             </div> :
-            <div>
+            <div className="min-h-[60vh]">
                 {roadmaps.map((item, index) => (
                     <Card key={index} onClick={() => {router.replace(`/roadmap/${item._id}`)}} className="w-1/4 m-4 bg-gray-950 text-white">
                     <CardTitle className="p-5 text-2xl font-semibold text-gradient">{item.title}</CardTitle>

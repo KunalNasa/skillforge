@@ -9,6 +9,7 @@ interface RoadmapTask {
 
 interface RoadmapProps {
     roadmapData: {
+        _id: any;
         title: string;
         tasks: RoadmapTask[];
     };
@@ -49,7 +50,7 @@ export default function MirroredRoadmap({ roadmapData }: RoadmapProps) {
                 </svg>
                 <div className="grid grid-cols-3 gap-8">
                     {roadmapData.tasks.map((task, index) => (
-                        <Link href={`/roadmap/#${task.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
+                        <Link href={`/roadmap/${roadmapData._id}/#${task.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
                             key={index}
                             className={`w-40 h-40 rounded-full flex items-center justify-center bg-purple-700 border-4 border-purple-900 text-center p-4 ${index % 2 === 0 ? 'translate-y-[-20px]' : 'translate-y-[20px]'
                                 }`}
