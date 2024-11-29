@@ -52,6 +52,24 @@ export async function PATCH(request: NextRequest, { params }: { params: { roadma
       }
     })
 
+    const taskArray = roadmap.tasks;
+    const totalTasks = taskArray.length;
+    let completedTask = 0;
+    //can be replaced by array.filter method
+    for (const obj of taskArray) {
+      if (obj.is_completed) {
+        completedTask++;
+      }
+    }
+    let progress;
+    if (totalTasks > 0) {
+      progress = (completedTask / totalTasks) * 100;
+    } else {
+      progress = 0;
+    }
+
+    roadmap.progress = progress;
+
     await roadmap.save();
     // if (!updatedRoadmap) {
     //   return NextResponse.json<ApiResponse>({
