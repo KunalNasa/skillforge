@@ -10,6 +10,11 @@ import { useRouter } from "next/navigation"
 import { Separator } from "../ui/separator"
 import Image from "next/image"
 import Loader from "../Loader"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog"
+import { Button } from "../ui/button"
+import axios from "axios"
+import { toast } from "@/hooks/use-toast"
+import { MdDelete } from "react-icons/md"
 
 const RoadmapCards = () => {
     const [roadmaps, setRoadmaps] = useState<[Roadmap] | []>([]);
@@ -22,6 +27,20 @@ const RoadmapCards = () => {
     useEffect(() => {
         fetchRoadmaps();
     }, []);
+    const handleDelete = async (id : string) => {
+        axios.delete(`/api/delete-roadmap/${id}`).then(() => {toast({
+            title : "Deleted",
+            description : "Roadmap deleted successfully",
+            variant : "default"
+        })}).catch((error) => {
+            console.error(error);
+            toast({
+              title: "Error",
+              description: "Failed to delete the roadmap.",
+              variant: "destructive",
+            });
+          });
+    }
     return (
         <div>
             {loading && <Loader />}
@@ -36,9 +55,34 @@ const RoadmapCards = () => {
                 </div> : (
                     <div className="flex flex-wrap">
                         {roadmaps.map((item, index) => (
-                            <Card key={index} onClick={() => { router.replace(`/roadmap/${item._id}`) }} className="w-1/4 m-4 bg-gray-950 text-white">
-                                <CardTitle className="p-5 text-2xl font-semibold text-gradient">{item.title}</CardTitle>
-                                <CardContent className="text-gray-300 flex flex-col font-semibold">
+                            <Card key={index} className="w-1/4 m-4 bg-gray-950 cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out shadow-lg hover:shadow-2xl text-white">
+                                <CardTitle className="p-5 text-2xl font-semibold text-gradient">
+                                    {item.title}
+                                    <div className="p-2">
+                                        <AlertDialog>
+                                        <AlertDialogTrigger asChild>
+                                            <Button className="hover:bg-red-600 text-gray-300 font-semibold text-xl hover:text-gray-300" variant="outline">
+                                            <MdDelete/>
+                                            </Button>
+                                        </AlertDialogTrigger>
+                                        <AlertDialogContent>
+                                            <AlertDialogHeader>
+                                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                            This action cannot be undone. This will permanently delete your roadmap
+                                            and remove its data from our servers.
+                                            </AlertDialogDescription>
+                                            </AlertDialogHeader>
+                                            <AlertDialogFooter>
+                                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                            <AlertDialogAction onClick={() => handleDelete(item._id.toString())} >Continue</AlertDialogAction>
+                                            </AlertDialogFooter>
+                                        </AlertDialogContent>
+                                        </AlertDialog>
+                                    </div>
+                                    </CardTitle>
+                                <CardContent 
+                                 onClick={() => { router.replace(`/roadmap/${item._id}`) }}className="text-gray-300 flex flex-col font-semibold">
                                     <p>
                                         Sections : {item.tasks.length}
                                     </p>

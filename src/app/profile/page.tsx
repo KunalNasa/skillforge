@@ -71,7 +71,7 @@ const page = () => {
                 <UserProfile/>
                 <RoadmapCards/>
                 <div>
-                    <h2 className="text-2xl font-semibold text-gradient pt-5 pb-2">Facts</h2>
+                    <h2 className="text-2xl font-semibold text-gradient pt-5 pb-2">Fact</h2>
                     <p className="text-gray-300 pb-4 font-semibold font-mono">{fact}</p>
                 </div>
             </div>

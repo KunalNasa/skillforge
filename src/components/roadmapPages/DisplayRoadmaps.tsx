@@ -37,7 +37,7 @@ const DisplayRoadmaps = () => {
                 <div className="min-h-[60vh] flex flex-wrap">
                     {loading && <>Hello</>}
                     {roadmaps.map((item, index) => (
-                        <Card key={index} onClick={() => { router.replace(`/roadmap/${item._id}`) }} className="w-1/4 m-4 bg-gray-950 h-1/2 text-white">
+                        <Card key={index} onClick={() => { router.replace(`/roadmap/${item._id}`) }} className="w-1/4 m-4 transform hover:scale-110 transition-transform duration-300 ease-in-out shadow-lg hover:shadow-2xl cursor-pointer bg-gray-950 h-1/2 text-white">
                             <CardTitle className="p-5 text-2xl font-semibold text-gradient">{item.title}</CardTitle>
                             <CardContent className="text-gray-300 flex flex-col font-semibold">
                                 <p>
