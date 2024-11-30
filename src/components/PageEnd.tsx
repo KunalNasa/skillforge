@@ -17,7 +17,7 @@ const PageEnd = () => {
             © 2024 SkillForge. All rights reserved.
           </p>
         </div>
-        <div className='flex bg-red-600 w-5/12 flex-col md:flex-row gap-2 md:gap-5 mx-4'>
+        <div className='flex w-5/12 flex-col md:flex-row gap-2 md:gap-5 mx-4'>
           <p className='my-5 text-gray-400'>
             Connect :
           </p>
