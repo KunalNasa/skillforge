@@ -35,7 +35,7 @@ const UserProfile = () => {
         }
     })
     return (
-        <div className="border-2 rounded-md w-full h-full">
+        <div className="border-2 md:m-5 rounded-md w-full h-full">
             {loading && <Loader />}
             {toggle ? <Form {...form}>
                 <form className="p-6 rounded-lg shadow-lg mx-auto" onSubmit={form.handleSubmit(onSubmit)}>
@@ -156,7 +156,7 @@ const UserProfile = () => {
                     </div>
                 </div>}
             <div className="flex items-center justify-end p-2">
-                <Button className={`bg-green-700 hover:bg-green-500 w-1/12 font-semibold ${toggle && 'bg-red-500 hover:bg-red-700'}`}
+                <Button className={`bg-green-700 hover:bg-green-500 w-3/12 md:w-1/12 font-semibold ${toggle && 'bg-red-500 hover:bg-red-700'}`}
                     onClick={() => { setToggle(!toggle) }}>{toggle ? "Discard" : "Edit"}</Button>
 
             </div>

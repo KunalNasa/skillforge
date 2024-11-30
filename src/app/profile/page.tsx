@@ -23,8 +23,8 @@ const page = () => {
   return (
     <div className="MainContainer">
         <Header/>
-        <div className="WholePage flex">
-            <div className="flex rounded-md m-1 flex-col p-10 w-3/12">
+        <div className="WholePage flex md:flex-row flex-col">
+            <div className="flex md:p-5 md:m-5 rounded-md m-1 flex-col p-10 w-full md:w-3/12">
                 <Avatar>
                     <AvatarImage src="https://github.com/shadcn.png" />
                     <AvatarFallback>CN</AvatarFallback>
@@ -66,7 +66,7 @@ const page = () => {
                     </AlertDialog>
                 </div>
             </div>
-            <div className="w-9/12 m-1 flex flex-col">
+            <div className="md:w-9/12 md:m-5 md:p-5 w-full m-1 flex flex-col">
                 <h1 className="text-3xl font-semibold text-gradient py-4">Your Profile</h1>
                 <UserProfile/>
                 <RoadmapCards/>

@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
-  if (!token && (url.pathname.startsWith('/dashboard') || url.pathname.startsWith('/profile'))) {
+  if (!token && (url.pathname.startsWith('/dashboard') || url.pathname.startsWith('/profile') || url.pathname.startsWith('/roadmap'))) {
     return NextResponse.redirect(new URL('/', request.url));
   }
   return NextResponse.next();

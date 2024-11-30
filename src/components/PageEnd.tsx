@@ -13,15 +13,15 @@ const PageEnd = () => {
       <div className='MainContainer flex items-center justify-between'>
         <div className='p-1 flex items-center'>
           <Image width={75} height={75} src="/Logo.svg" alt="" />
-          <p className='my-5 text-sm text-gray-500'>
+          <p className='my-5 w-7/12 text-sm text-gray-500'>
             © 2024 SkillForge. All rights reserved.
           </p>
         </div>
-        <div className='flex md:flex-col gap-2 md:gap-5 mx-4'>
+        <div className='flex bg-red-600 w-5/12 flex-col md:flex-row gap-2 md:gap-5 mx-4'>
           <p className='my-5 text-gray-400'>
             Connect :
           </p>
-          <div className='flex md:gap-5'>
+          <div className='flex gap-2 md:gap-5'>
           <Link 
                 href="https://twitter.com"
                 target="_blank"
