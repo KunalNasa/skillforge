@@ -27,20 +27,25 @@ const RoadmapCards = () => {
     useEffect(() => {
         fetchRoadmaps();
     }, []);
-    const handleDelete = async (id : string) => {
-        axios.delete(`/api/delete-roadmap/${id}`).then(() => {toast({
-            title : "Deleted",
-            description : "Roadmap deleted successfully",
-            variant : "default"
-        })}).catch((error) => {
+    const handleDelete = async (id: string) => {
+        try {
+            await axios.delete(`/api/delete-roadmap/${id}`);
+            toast({
+                title: "Deleted",
+                description: "Roadmap deleted successfully",
+                variant: "default"
+            });
+            window.location.reload();
+        } catch (error) {
             console.error(error);
             toast({
-              title: "Error",
-              description: "Failed to delete the roadmap.",
-              variant: "destructive",
+                title: "Error",
+                description: "Failed to delete the roadmap.",
+                variant: "destructive",
             });
-          });
-    }
+        }
+    };
+    
     return (
         <div>
             {loading && <Loader />}
