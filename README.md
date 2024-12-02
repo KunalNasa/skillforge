@@ -136,7 +136,7 @@ SOFTWARE.
 
 ## Contact 📧
 
-- Project Link: [https://github.com/yourusername/skillforge](https://github.com/yourusername/skillforge)
+- Project Link: [https://github.com/KunalNasa/skillforge](https://github.com/KunalNasa/skillforge)
 - Live Demo: [https://skillforge.kunalnasa.xyz](https://skillforge.kunalnasa.xyz)
 
 ## Acknowledgments 🙏
