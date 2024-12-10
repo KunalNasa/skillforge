@@ -89,7 +89,7 @@ const RoadmapCards = () => {
                                 <CardContent 
                                  onClick={() => { router.replace(`/roadmap/${item._id}`) }}className="text-gray-300 flex flex-col font-semibold">
                                     <p>
-                                        Sections : {item.tasks.length}
+                                        Sections : {item.tasks.length ? item.tasks.length : 0}
                                     </p>
                                     <p>
                                         duration : {item.duration} months
