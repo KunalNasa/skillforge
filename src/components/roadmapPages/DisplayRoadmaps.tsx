@@ -30,7 +30,7 @@ const DisplayRoadmaps = () => {
                 <Separator />
             </div>
             {loading && <div>Hello</div>}
-            {roadmaps.length === 0 ?
+            {!roadmaps || roadmaps.length === 0 ?
                 <div className="min-h-[60vh] flex flex-wrap">
                     <h4 className="text-4xl font-semibold m-5 p-5">No Roadmaps to Display, Please Create One</h4>
                 </div> :
