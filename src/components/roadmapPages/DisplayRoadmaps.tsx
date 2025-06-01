@@ -29,7 +29,7 @@ const DisplayRoadmaps = () => {
                 <h2 className="text-3xl md:text-5xl font-bold text-gradient p-5 m-5 mb-2 pb-2">Your Roadmaps</h2>
                 <Separator />
             </div>
-            {loading && <div>Hello</div>}
+            {loading && <div>Loading....</div>}
             {!roadmaps || roadmaps.length === 0 ?
                 <div className="min-h-[60vh] flex flex-wrap">
                     <h4 className="text-4xl font-semibold m-5 p-5">No Roadmaps to Display, Please Create One</h4>
