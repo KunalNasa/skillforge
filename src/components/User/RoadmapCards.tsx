@@ -60,7 +60,7 @@ const RoadmapCards = () => {
                 </div> : (
                     <div className="flex flex-wrap">
                         {roadmaps.map((item, index) => (
-                            <Card key={index} className=" w-11/12 md:w-1/4 m-4 bg-gray-950 cursor-pointer transform hover:scale-110 transition-transform duration-300 ease-in-out shadow-lg hover:shadow-2xl text-white">
+                            <Card key={index} className=" w-11/12 md:w-1/4 m-4 bg-gray-950 cursor-pointer transform hover:scale-105 transition-transform duration-300 ease-in-out shadow-lg hover:shadow-2xl text-white">
                                 <CardTitle className="p-5 text-2xl flex items-center justify-between font-semibold text-gradient">
                                     {item.title}
                                     <div className="p-2">
