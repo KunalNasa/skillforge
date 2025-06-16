@@ -23,7 +23,6 @@ export async function POST(request: Request) {
         }, { status: StatusCodes.UNAUTHORIZED });
     }
     try {
-
         const user = await UserModel.findById(userId);
         if (!user) {
             return NextResponse.json<ApiResponse>({
